@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class StatesController < ApplicationController
+class StatesController < OpenReadController
   before_action :set_state, only: %i[show update destroy]
 
   # GET /states
