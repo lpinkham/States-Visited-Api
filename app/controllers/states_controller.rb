@@ -5,9 +5,9 @@ class StatesController < OpenReadController
 
   # GET /states
   def index
-    @states = State.all
+    @state = State.all
 
-    render json: @states
+    render json: @state
   end
 
   # GET /states/1
@@ -17,10 +17,10 @@ class StatesController < OpenReadController
 
   # POST /states
   def create
-    @state = State.new(state_params)
+    @state = current_user.states.build(state_params)
 
     if @state.save
-      render json: @state, status: :created, location: @state
+      render json: @state, status: :created
     else
       render json: @state.errors, status: :unprocessable_entity
     end
@@ -40,8 +40,6 @@ class StatesController < OpenReadController
     @state.destroy
   end
 
-  private
-
   # Use callbacks to share common setup or constraints between actions.
   def set_state
     @state = State.find(params[:id])
@@ -49,6 +47,9 @@ class StatesController < OpenReadController
 
   # Only allow a trusted parameter "white list" through.
   def state_params
-    params.require(:state).permit(:state_name, :date_visited, :highlight, :revisit)
+    params.require(:state).permit(:state_name, :date_visited, :highlight,
+                                  :revisit)
   end
+
+  private :set_state, :state_params
 end
