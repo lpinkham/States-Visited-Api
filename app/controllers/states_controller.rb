@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-class StatesController < ApplicationController
+class StatesController < ProtectedController
   before_action :set_state, only: %i[show update destroy]
 
   # GET /states
   def index
-    @states = State.all
+    # @states = State.all
+    @states = current_user.states.all
 
     render json: @states
   end
@@ -17,7 +18,7 @@ class StatesController < ApplicationController
 
   # POST /states
   def create
-    @state = State.new(state_params)
+    @state = current_user.states.build(state_params)
 
     if @state.save
       render json: @state, status: :created, location: @state
