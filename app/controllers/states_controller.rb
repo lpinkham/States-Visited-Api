@@ -49,6 +49,7 @@ class StatesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def state_params
-    params.require(:state).permit(:state_name, :date_visited, :highlight, :revisit)
+    params.require(:state).permit(:state_name, :date_visited, :highlight,
+                                  :revisit)
   end
 end
