@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-class StatesController < OpenReadController
+class StatesController < ProtectedController
   before_action :set_state, only: %i[show update destroy]
 
   # GET /states
   def index
-    @state = State.all
+    # @states = State.all
+    @states = current_user.states.all
 
     render json: @state
   end
