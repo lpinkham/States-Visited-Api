@@ -5,6 +5,7 @@ class StatesController < ProtectedController
 
   # GET /states
   def index
+    # made change here to use ProtectedController
     # @states = State.all
     @states = current_user.states.all
 
