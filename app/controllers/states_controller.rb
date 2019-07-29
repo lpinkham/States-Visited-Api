@@ -7,7 +7,7 @@ class StatesController < ProtectedController
   def index
     @states = current_user.states.all
 
-    render json: @state
+    render json: @states
   end
 
   # GET /states/1
@@ -42,7 +42,7 @@ class StatesController < ProtectedController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_state
-    @state = State.find(params[:id])
+    @state = current_user.states.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
